@@ -1,0 +1,26 @@
+# Doxyfile configuration for Doxygen
+
+# Project-related settings
+PROJECT_NAME           = "Batched SPSC Queue"
+PROJECT_BRIEF          = "A batched single-producer single-consumer queue implementation"
+OUTPUT_DIRECTORY       = @CMAKE_CURRENT_BINARY_DIR@
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+
+# Input settings
+INPUT                  = @CMAKE_SOURCE_DIR@/include @CMAKE_SOURCE_DIR@/src
+RECURSIVE              = YES# Example settings
+
+EXAMPLE_PATH           = @CMAKE_SOURCE_DIR@/examples
+EXAMPLE_PATTERNS       = *.cc
+
+# Documentation settings
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+EXTRACT_LOCAL_CLASSES  = YES
+EXTRACT_LOCAL_METHODS  = YES
+
+# HTML settings
+HTML_OUTPUT            = html
+HTML_EXTRA_STYLESHEET  = @CMAKE_SOURCE_DIR@/docs/doxygen-awesome.css
