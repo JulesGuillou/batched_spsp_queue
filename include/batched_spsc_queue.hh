@@ -17,7 +17,7 @@ namespace batched_spsc_queue {
  * This class provides a high-performance queue that allows batching of enqueue
  * and dequeue operations. It is designed for scenarios where a single producer
  * thread enqueues data and a single consumer thread dequeues data. The queue
- * uses a preallocated memory buffer to store elements, and it supports batched
+ * uses a pre-allocated memory buffer to store elements, and it supports batched
  * operations to improve performance. Sequential elements in a batch are
  * guaranteed to be sequential in memory.
  *
@@ -49,7 +49,7 @@ public:
    * @param dequeue_batch_size The number of elements that can be
    * dequeued in a single batch.
    * @param element_size The size of each element in bytes.
-   * @param buffer A preallocated memory block that is large enough to contain
+   * @param buffer A pre-allocated memory block that is large enough to contain
    * nb_slots * element_size bytes.
    *
    * @note Not meeting the specified conditions results in undefined behavior.
@@ -181,7 +181,7 @@ private:
   /// The size of each element in bytes.
   size_t element_size_;
 
-  /// A preallocated memory block for storing elements.
+  /// A pre-allocated memory block for storing elements.
   uint8_t *buffer_;
 
   /// The current write index.
