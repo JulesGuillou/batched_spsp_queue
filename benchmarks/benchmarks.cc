@@ -25,12 +25,12 @@ static void BM_Enqueue_NoMemoryTransfer(benchmark::State &state) {
     queue.commit_write();
   }
 
-  state.counters["Enqueues"] =
-      benchmark::Counter(static_cast<double>(state.iterations()), benchmark::Counter::kIsRate);
+  state.counters["Enqueues"] = benchmark::Counter(
+      static_cast<double>(state.iterations()), benchmark::Counter::kIsRate);
 
   state.counters["Bandwidth"] = benchmark::Counter(
-      static_cast<double>(state.iterations()) * 8 * 512 * 512, benchmark::Counter::kIsRate,
-      benchmark::Counter::kIs1024);
+      static_cast<double>(state.iterations()) * 8 * 512 * 512,
+      benchmark::Counter::kIsRate, benchmark::Counter::kIs1024);
 }
 
 static void BM_Dequeue_NoMemoryTransfer(benchmark::State &state) {
@@ -54,12 +54,12 @@ static void BM_Dequeue_NoMemoryTransfer(benchmark::State &state) {
     queue.commit_read();
   }
 
-  state.counters["Dequeues"] =
-      benchmark::Counter(static_cast<double>(state.iterations()), benchmark::Counter::kIsRate);
+  state.counters["Dequeues"] = benchmark::Counter(
+      static_cast<double>(state.iterations()), benchmark::Counter::kIsRate);
 
   state.counters["Bandwidth"] = benchmark::Counter(
-      static_cast<double>(state.iterations()) * 8 * 512 * 512, benchmark::Counter::kIsRate,
-      benchmark::Counter::kIs1024);
+      static_cast<double>(state.iterations()) * 8 * 512 * 512,
+      benchmark::Counter::kIsRate, benchmark::Counter::kIs1024);
 }
 
 static void BM_Enqueue_WithMemoryTransfer(benchmark::State &state) {
@@ -88,12 +88,12 @@ static void BM_Enqueue_WithMemoryTransfer(benchmark::State &state) {
     queue.commit_write();
   }
 
-  state.counters["Enqueues"] =
-      benchmark::Counter(static_cast<double>(state.iterations()), benchmark::Counter::kIsRate);
+  state.counters["Enqueues"] = benchmark::Counter(
+      static_cast<double>(state.iterations()), benchmark::Counter::kIsRate);
 
   state.counters["Bandwidth"] = benchmark::Counter(
-      static_cast<double>(state.iterations()) * 8 * 512 * 512, benchmark::Counter::kIsRate,
-      benchmark::Counter::kIs1024);
+      static_cast<double>(state.iterations()) * 8 * 512 * 512,
+      benchmark::Counter::kIsRate, benchmark::Counter::kIs1024);
 }
 
 static void BM_Dequeue_WithMemoryTransfer(benchmark::State &state) {
@@ -122,12 +122,12 @@ static void BM_Dequeue_WithMemoryTransfer(benchmark::State &state) {
     queue.commit_read();
   }
 
-  state.counters["Dequeues"] =
-      benchmark::Counter(static_cast<double>(state.iterations()), benchmark::Counter::kIsRate);
+  state.counters["Dequeues"] = benchmark::Counter(
+      static_cast<double>(state.iterations()), benchmark::Counter::kIsRate);
 
   state.counters["Bandwidth"] = benchmark::Counter(
-      static_cast<double>(state.iterations()) * 8 * 512 * 512, benchmark::Counter::kIsRate,
-      benchmark::Counter::kIs1024);
+      static_cast<double>(state.iterations()) * 8 * 512 * 512,
+      benchmark::Counter::kIsRate, benchmark::Counter::kIs1024);
 }
 
 BENCHMARK(BM_Enqueue_NoMemoryTransfer)->MinTime(5.0);
