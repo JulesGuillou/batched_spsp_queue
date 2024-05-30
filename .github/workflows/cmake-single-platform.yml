@@ -28,10 +28,10 @@ jobs:
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 
     - name: Run clang-format
-      run: clang-format -i ${{github.workspace}}/src/**/*..cc ${{github.workspace}}/include/**/*.hh
+      run: find ${{github.workspace}}/src ${{github.workspace}}/examples ${{github.workspace}}/tests ${{github.workspace}}/benchmarks -type f \( -name '*.cc' -o -name '*.hh' \) -print0 | xargs -0 clang-format -n --Werror
 
     - name: Run clang-tidy
-      run: find src examples tests benchmarks -type f \( -name '*.cc' -o -name '*.hh' \) -print0 | xargs -0 clang-tidy -p build
+      run: find ${{github.workspace}}/src ${{github.workspace}}/examples ${{github.workspace}}/tests ${{github.workspace}}/benchmarks -type f \( -name '*.cc' -o -name '*.hh' \) -print0 | xargs -0 clang-tidy -p build
 
     - name: Build
       # Build your program with the given configuration
