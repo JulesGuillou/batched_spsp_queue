@@ -25,7 +25,13 @@ jobs:
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+
+    - name: Run clang-format
+      run: clang-format -i ${{github.workspace}}/src/**/*..cc ${{github.workspace}}/include/**/*.hh
+
+    - name: Run clang-tidy
+      run: find src examples tests benchmarks -type f \( -name '*.cc' -o -name '*.hh' \) -print0 | xargs -0 clang-tidy -p build
 
     - name: Build
       # Build your program with the given configuration
