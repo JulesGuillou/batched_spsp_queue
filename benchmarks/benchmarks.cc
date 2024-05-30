@@ -26,10 +26,10 @@ static void BM_Enqueue_NoMemoryTransfer(benchmark::State &state) {
   }
 
   state.counters["Enqueues"] =
-      benchmark::Counter(state.iterations(), benchmark::Counter::kIsRate);
+      benchmark::Counter(static_cast<double>(state.iterations()), benchmark::Counter::kIsRate);
 
   state.counters["Bandwidth"] = benchmark::Counter(
-      state.iterations() * 8 * 512 * 512, benchmark::Counter::kIsRate,
+      static_cast<double>(state.iterations()) * 8 * 512 * 512, benchmark::Counter::kIsRate,
       benchmark::Counter::kIs1024);
 }
 
@@ -55,10 +55,10 @@ static void BM_Dequeue_NoMemoryTransfer(benchmark::State &state) {
   }
 
   state.counters["Dequeues"] =
-      benchmark::Counter(state.iterations(), benchmark::Counter::kIsRate);
+      benchmark::Counter(static_cast<double>(state.iterations()), benchmark::Counter::kIsRate);
 
   state.counters["Bandwidth"] = benchmark::Counter(
-      state.iterations() * 8 * 512 * 512, benchmark::Counter::kIsRate,
+      static_cast<double>(state.iterations()) * 8 * 512 * 512, benchmark::Counter::kIsRate,
       benchmark::Counter::kIs1024);
 }
 
@@ -89,10 +89,10 @@ static void BM_Enqueue_WithMemoryTransfer(benchmark::State &state) {
   }
 
   state.counters["Enqueues"] =
-      benchmark::Counter(state.iterations(), benchmark::Counter::kIsRate);
+      benchmark::Counter(static_cast<double>(state.iterations()), benchmark::Counter::kIsRate);
 
   state.counters["Bandwidth"] = benchmark::Counter(
-      state.iterations() * 8 * 512 * 512, benchmark::Counter::kIsRate,
+      static_cast<double>(state.iterations()) * 8 * 512 * 512, benchmark::Counter::kIsRate,
       benchmark::Counter::kIs1024);
 }
 
@@ -123,10 +123,10 @@ static void BM_Dequeue_WithMemoryTransfer(benchmark::State &state) {
   }
 
   state.counters["Dequeues"] =
-      benchmark::Counter(state.iterations(), benchmark::Counter::kIsRate);
+      benchmark::Counter(static_cast<double>(state.iterations()), benchmark::Counter::kIsRate);
 
   state.counters["Bandwidth"] = benchmark::Counter(
-      state.iterations() * 8 * 512 * 512, benchmark::Counter::kIsRate,
+      static_cast<double>(state.iterations()) * 8 * 512 * 512, benchmark::Counter::kIsRate,
       benchmark::Counter::kIs1024);
 }
 

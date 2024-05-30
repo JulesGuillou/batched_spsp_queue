@@ -46,14 +46,16 @@ void Queue::commit_read() {
   read_idx_.store(next_read_idx, std::memory_order_release);
 }
 
-size_t Queue::size() {
-  std::ptrdiff_t diff = write_idx_.load(std::memory_order_acquire) -
-                        read_idx_.load(std::memory_order_acquire);
+[[maybe_unused]] size_t Queue::size() {
+  size_t write_idx = write_idx_.load(std::memory_order_acquire);
+  size_t read_idx = read_idx_.load(std::memory_order_acquire);
 
-  if (diff < 0)
+  size_t diff = write_idx - read_idx;
+
+  if (write_idx < read_idx)
     diff += nb_slots_;
 
-  return static_cast<size_t>(diff);
+  return diff;
 }
 
 void Queue::reset() {
@@ -67,22 +69,26 @@ void Queue::fill() {
 }
 
 size_t Queue::writer_size() {
-  std::ptrdiff_t diff = write_idx_.load(std::memory_order_relaxed) -
-                        read_idx_.load(std::memory_order_acquire);
+  size_t write_idx = write_idx_.load(std::memory_order_relaxed);
+  size_t read_idx = read_idx_.load(std::memory_order_acquire);
 
-  if (diff < 0)
+  size_t diff = write_idx - read_idx;
+
+  if (write_idx < read_idx)
     diff += nb_slots_;
 
-  return static_cast<size_t>(diff);
+  return diff;
 }
 
 size_t Queue::reader_size() {
-  std::ptrdiff_t diff = write_idx_.load(std::memory_order_acquire) -
-                        read_idx_.load(std::memory_order_relaxed);
+  size_t write_idx = write_idx_.load(std::memory_order_acquire);
+  size_t read_idx = read_idx_.load(std::memory_order_relaxed);
 
-  if (diff < 0)
+  size_t diff = write_idx - read_idx;
+
+  if (write_idx < read_idx)
     diff += nb_slots_;
 
-  return static_cast<size_t>(diff);
+  return diff;
 }
 } // namespace batched_spsc_queue
